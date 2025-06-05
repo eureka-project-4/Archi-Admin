@@ -1,0 +1,12 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: archi-admin
+
+  profiles:
+    active: local
+
+  config:
+    import: application-secret.yml
