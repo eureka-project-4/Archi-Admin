@@ -1,5 +1,6 @@
 package com.archiadmin.common.config.security.handler;
 
+import com.archiadmin.exception.ErrorCode;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,12 +18,19 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
                                         HttpServletResponse response,
                                         AuthenticationException exception) throws IOException, ServletException {
 
+        ErrorCode errorCode = ErrorCode.UNAUTHORIZED;
+
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 401
         response.setContentType("application/json");
-        String jsonStr =
-                """
-                        {"result": "fail"}
-                """;
+        response.setCharacterEncoding("UTF-8");
+        String jsonStr = String.format("""
+            {
+              "status": %d,
+              "code": "%s",
+              "message": "%s"
+            }
+            """, errorCode.getStatus().value(), errorCode.getCode(), errorCode.getMessage());
+
         response.getWriter().write(jsonStr);
     }
 }

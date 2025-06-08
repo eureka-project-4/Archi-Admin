@@ -18,10 +18,14 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         response.setStatus(HttpServletResponse.SC_OK); // 200
         response.setContentType("application/json");
-        String jsonStr =
-                """
-                        {"result": "success"}
-                """;
+        response.setCharacterEncoding("UTF-8");
+        String jsonStr = """
+            {
+              "status": 200,
+              "code": "AUTH000",
+              "message": "로그인에 성공하였습니다"
+            }
+            """;
         response.getWriter().write(jsonStr);
     }
 }
