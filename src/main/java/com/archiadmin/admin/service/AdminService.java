@@ -1,8 +1,8 @@
 package com.archiadmin.admin.service;
 
-import com.archiadmin.admin.dto.request.AdminRegisterDto;
-import com.archiadmin.admin.dto.response.AdminResultDto;
+import com.archiadmin.admin.dto.request.AdminRegisterRequestDto;
+import com.archiadmin.admin.dto.response.AdminRegisterResponseDto;
 
 public interface AdminService {
-    AdminResultDto register(AdminRegisterDto registerDto);
+    AdminRegisterResponseDto register(AdminRegisterRequestDto registerDto);
 }

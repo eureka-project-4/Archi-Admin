@@ -3,7 +3,7 @@ package com.archiadmin.admin.dto.request;
 import lombok.Getter;
 
 @Getter
-public class AdminRegisterDto {
+public class AdminRegisterRequestDto {
     private String email;
     private String password;
 
