@@ -1,6 +1,7 @@
 package com.archiadmin.admin.service.impl;
 
 import com.archiadmin.admin.dto.request.AdminRegisterDto;
+import com.archiadmin.admin.dto.response.AdminDto;
 import com.archiadmin.admin.dto.response.AdminResultDto;
 import com.archiadmin.admin.entity.Admin;
 import com.archiadmin.admin.repository.AdminRepository;
@@ -26,21 +27,17 @@ public class AdminServiceImpl implements AdminService {
     public AdminResultDto register(AdminRegisterDto registerDto) {
         AdminResultDto adminResultDto = new AdminResultDto();
 
-        try {
-            if (adminRepository.existsByEmail(registerDto.getEmail())) {
-                throw new BusinessException(ErrorCode.USER_ALREADY_EXISTS);
-            }
-
-            Admin admin = Admin.builder()
-                    .email(registerDto.getEmail())
-                    .password(passwordEncoder.encode(registerDto.getPassword()))
-                    .build();
-
-            adminRepository.save(admin);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (adminRepository.existsByEmail(registerDto.getEmail())) {
+            throw new BusinessException(ErrorCode.USER_ALREADY_EXISTS);
         }
 
-        return adminResultDto;
+        Admin admin = Admin.builder()
+                .email(registerDto.getEmail())
+                .password(passwordEncoder.encode(registerDto.getPassword()))
+                .build();
+
+        adminRepository.save(admin);
+
+        return AdminResultDto.from(admin);
     }
 }
