@@ -26,7 +26,7 @@ public class AdminServiceImpl implements AdminService {
     public AdminRegisterResponseDto register(AdminRegisterRequestDto registerDto) {
 
         if (adminRepository.existsByEmail(registerDto.getEmail())) {
-            throw new BusinessException(ErrorCode.USER_ALREADY_EXISTS);
+            throw new BusinessException(ErrorCode.ADMIN_ALREADY_EXISTS);
         }
 
         Admin admin = Admin.builder()
