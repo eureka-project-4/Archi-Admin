@@ -79,22 +79,19 @@ public class PlanServiceImpl implements PlanService {
     public PlanResponseDto updatePlan(Long planId, PlanRequestDto planRequestDto) {
         PlanResponseDto planResponseDto = new PlanResponseDto();
 
-        planRepository.findById(planId)
+        Plan plan = planRepository.findById(planId)
                 .orElseThrow(() -> new DataNotFoundException("Plan Id " + planId + " Not Found"));
 
-        Plan updatedPlan = Plan.builder()
-                .planId(planId)
-                .planName(planRequestDto.getPlanName())
-                .monthData(planRequestDto.getMonthData())
-                .callUsage(planRequestDto.getCallUsage())
-                .messageUsage(planRequestDto.getMessageUsage())
-                .benefit(planRequestDto.getBenefit())
-                .tagCode(planRequestDto.getTagCode())
-                .ageCode(planRequestDto.getAgeCode())
-                .categoryCode(planRequestDto.getCategoryCode())
-                .build();
+        plan.setPlanName(planRequestDto.getPlanName());
+        plan.setMonthData(planRequestDto.getMonthData());
+        plan.setCallUsage(planRequestDto.getCallUsage());
+        plan.setMessageUsage(planRequestDto.getMessageUsage());
+        plan.setBenefit(planRequestDto.getBenefit());
+        plan.setTagCode(planRequestDto.getTagCode());
+        plan.setAgeCode(planRequestDto.getAgeCode());
+        plan.setCategoryCode(planRequestDto.getCategoryCode());
 
-        planRepository.save(updatedPlan);
+        Plan updatedPlan = planRepository.save(plan);
 
         planResponseDto.setPlanDto(PlanDto.from(updatedPlan));
 
