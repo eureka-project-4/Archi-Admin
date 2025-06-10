@@ -18,6 +18,7 @@ public enum ErrorCode {
 
   RESOURCE_ALREADY_EXISTS(HttpStatus.CONFLICT, "D409", "이미 존재하는 리소스입니다.");
 
+
   private final HttpStatus status;
   private final String code;
   private final String message;
