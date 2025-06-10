@@ -14,7 +14,10 @@ public enum ErrorCode {
 
   ADMIN_NOT_FOUND(HttpStatus.NOT_FOUND, "U404", "관리자를 찾을 수 없습니다."),
 
-  RESOURCE_NOT_FOUND(HttpStatus.NOT_FOUND, "D404", "해당 리소스를 찾을 수 없습니다");
+  RESOURCE_NOT_FOUND(HttpStatus.NOT_FOUND, "D404", "해당 리소스를 찾을 수 없습니다"),
+
+  RESOURCE_ALREADY_EXISTS(HttpStatus.CONFLICT, "D409", "이미 존재하는 리소스입니다.");
+
 
   private final HttpStatus status;
   private final String code;
