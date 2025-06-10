@@ -13,6 +13,7 @@ import lombok.*;
 public class GroupCode {
 
     @Id
+    @Column(name = "group_code", length = 3)
     private String groupCode;
     private String groupName;
 
