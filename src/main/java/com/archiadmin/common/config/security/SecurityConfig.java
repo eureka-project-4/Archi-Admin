@@ -22,7 +22,7 @@ public class SecurityConfig {
                         request -> {
                             request.requestMatchers("/",
                                             "/csrf-token",
-                                            "/api/admins/register")
+                                            "/admins/register")
                                     .permitAll()
                                     .anyRequest().authenticated();
                         }
@@ -31,13 +31,13 @@ public class SecurityConfig {
                 .formLogin(form ->
                         form
                                 .loginPage("/login.html")
-                                .loginProcessingUrl("/api/admins/login")
+                                .loginProcessingUrl("/admins/login")
                                 .usernameParameter("email")
                                 .passwordParameter("password")
                                 .successHandler(successHandler)
                                 .failureHandler(failureHandler)
                                 .permitAll())
-                .logout(logout -> logout.logoutUrl("/api/admins/logout").permitAll())
+                .logout(logout -> logout.logoutUrl("/admins/logout").permitAll())
                 .build();
     }
 
