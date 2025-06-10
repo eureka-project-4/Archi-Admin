@@ -1,9 +1,9 @@
 package com.archiadmin.service.controller;
 
 import com.archiadmin.common.response.ApiResponse;
-import com.archiadmin.service.dto.request.VASRequestDto;
-import com.archiadmin.service.dto.response.VASResponseDto;
-import com.archiadmin.service.service.VASService;
+import com.archiadmin.service.dto.request.VasRequestDto;
+import com.archiadmin.service.dto.response.VasResponseDto;
+import com.archiadmin.service.service.VasService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,31 +11,31 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/vass")
 @RequiredArgsConstructor
-public class ServiceController {
+public class VasController {
 
-    private final VASService vasService;
+    private final VasService vasService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<VASResponseDto>> registerService(@RequestBody VASRequestDto vasRequestDto) {
-        VASResponseDto data = vasService.registerService(vasRequestDto);
+    public ResponseEntity<ApiResponse<VasResponseDto>> registerService(@RequestBody VasRequestDto vasRequestDto) {
+        VasResponseDto data = vasService.registerService(vasRequestDto);
         return ResponseEntity.ok(ApiResponse.success("부가서비스 등록이 성공적으로 처리되었습니다.", data));
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<VASResponseDto>> getServiceList(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
-        VASResponseDto data = vasService.getServiceList(pageNumber, pageSize);
+    public ResponseEntity<ApiResponse<VasResponseDto>> getServiceList(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
+        VasResponseDto data = vasService.getServiceList(pageNumber, pageSize);
         return ResponseEntity.ok(ApiResponse.success("전체 부가서비스 조회가 성공적으로 처리되었습니다.", data));
     }
 
     @GetMapping("/{serviceId}")
-    public ResponseEntity<ApiResponse<VASResponseDto>> getServiceById(@PathVariable Long serviceId) {
-        VASResponseDto data = vasService.getServiceById(serviceId);
+    public ResponseEntity<ApiResponse<VasResponseDto>> getServiceById(@PathVariable Long serviceId) {
+        VasResponseDto data = vasService.getServiceById(serviceId);
         return ResponseEntity.ok(ApiResponse.success("Service Id " + serviceId + " 조회가 성공적으로 처리되었습니다.", data));
     }
 
     @PutMapping("/{serviceId}")
-    public ResponseEntity<ApiResponse<VASResponseDto>> updateService(@PathVariable Long serviceId, @RequestBody VASRequestDto vasRequestDto) {
-        VASResponseDto data = vasService.updateService(serviceId, vasRequestDto);
+    public ResponseEntity<ApiResponse<VasResponseDto>> updateService(@PathVariable Long serviceId, @RequestBody VasRequestDto vasRequestDto) {
+        VasResponseDto data = vasService.updateService(serviceId, vasRequestDto);
         return ResponseEntity.ok(ApiResponse.success("Service Id " + serviceId + " 수정이 성공적으로 처리되었습니다.", data));
     }
 

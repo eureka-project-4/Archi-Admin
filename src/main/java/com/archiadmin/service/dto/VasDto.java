@@ -1,6 +1,6 @@
 package com.archiadmin.service.dto;
 
-import com.archiadmin.service.entity.VAS;
+import com.archiadmin.service.entity.Vas;
 import lombok.Builder;
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-public class VASDto {
+public class VasDto {
     private Long serviceId;
     private String serviceName;
     private int price;
@@ -20,8 +20,8 @@ public class VASDto {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public static VASDto from(VAS vas) {
-        return VASDto.builder()
+    public static VasDto from(Vas vas) {
+        return VasDto.builder()
                 .serviceId(vas.getServiceId())
                 .serviceName(vas.getServiceName())
                 .price(vas.getPrice())

@@ -3,7 +3,7 @@ package com.archiadmin.service.dto.request;
 import lombok.Getter;
 
 @Getter
-public class VASRequestDto {
+public class VasRequestDto {
     private String serviceName;
     private int price;
     private String imageUrl;

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class VAS {
+public class Vas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
