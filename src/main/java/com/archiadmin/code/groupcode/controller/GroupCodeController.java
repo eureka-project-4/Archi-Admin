@@ -30,18 +30,18 @@ public class GroupCodeController {
     @GetMapping("/detail")
     public ResponseEntity<ApiResponse<GroupCodeResponseDto>> getServiceById(@RequestParam String groupCode) {
         GroupCodeResponseDto data = groupCodeService.getGroupCodeById(groupCode);
-        return ResponseEntity.ok(ApiResponse.success("GroupCode Id [groupCode : " + groupCode + ", groupCode : " + groupCode + "] 조회가 성공적으로 처리되었습니다.", data));
+        return ResponseEntity.ok(ApiResponse.success("GroupCode Id " + groupCode + " 조회가 성공적으로 처리되었습니다.", data));
     }
 
     @PutMapping
     public ResponseEntity<ApiResponse<GroupCodeResponseDto>> updateService(@RequestBody GroupCodeDto groupCodeDto) {
         GroupCodeResponseDto data = groupCodeService.updateGroupCode(groupCodeDto);
-        return ResponseEntity.ok(ApiResponse.success("GroupCode Id [groupCode : " + groupCodeDto.getGroupCode() + ", groupCode : " + groupCodeDto.getGroupCode() + "] 수정이 성공적으로 처리되었습니다.", data));
+        return ResponseEntity.ok(ApiResponse.success("GroupCode Id " + groupCodeDto.getGroupCode() + " 수정이 성공적으로 처리되었습니다.", data));
     }
 
     @DeleteMapping
     public ResponseEntity<ApiResponse<Void>> deleteService(@RequestParam String groupCode) {
         groupCodeService.deleteGroupCode(groupCode);
-        return ResponseEntity.ok(ApiResponse.success("GroupCode Id [groupCode : " + groupCode + ", groupCode : " + groupCode + "] 삭제가 성공적으로 처리되었습니다.", null));
+        return ResponseEntity.ok(ApiResponse.success("GroupCode Id " + groupCode + " 삭제가 성공적으로 처리되었습니다.", null));
     }
 }
