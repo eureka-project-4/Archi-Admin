@@ -1,6 +1,5 @@
 package com.archiadmin.service.entity;
 
-import com.archiadmin.service.dto.request.ServiceRequestDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -15,7 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Service {
+public class VAS {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
