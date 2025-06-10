@@ -1,7 +1,7 @@
 package com.archiadmin.common.config.security;
 
 import com.archiadmin.admin.repository.AdminRepository;
-import com.archiadmin.exception.business.UserNotFoundException;
+import com.archiadmin.exception.business.AdminNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,6 +18,6 @@ public class AdminDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return adminRepository.findByEmail(email)
                 .map(AdminDetails::new)
-                .orElseThrow(() -> new UserNotFoundException(email + "not found"));
+                .orElseThrow(() -> new AdminNotFoundException(email + "not found"));
     }
 }
