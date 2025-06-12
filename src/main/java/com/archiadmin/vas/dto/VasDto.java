@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -15,12 +16,12 @@ public class VasDto {
     private String imageUrl;
     private String vasDescription;
     private int saleRate;
-    private long tagCode;
+    private List<String> tagList;
     private String categoryCode;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public static VasDto from(Vas vas) {
+    public static VasDto from(Vas vas, List<String> tagList) {
         return VasDto.builder()
                 .vasId(vas.getVasId())
                 .vasName(vas.getVasName())
@@ -28,7 +29,7 @@ public class VasDto {
                 .imageUrl(vas.getImageUrl())
                 .vasDescription(vas.getVasDescription())
                 .saleRate(vas.getSaleRate())
-                .tagCode(vas.getTagCode())
+                .tagList(tagList)
                 .categoryCode(vas.getCategoryCode())
                 .createdAt(vas.getCreatedAt())
                 .updatedAt(vas.getUpdatedAt())

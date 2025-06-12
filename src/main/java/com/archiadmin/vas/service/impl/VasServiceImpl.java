@@ -1,5 +1,6 @@
 package com.archiadmin.vas.service.impl;
 
+import com.archiadmin.code.tagmeta.service.TagMetaService;
 import com.archiadmin.exception.business.DataNotFoundException;
 import com.archiadmin.vas.dto.VasDto;
 import com.archiadmin.vas.dto.request.VasRequestDto;
@@ -21,6 +22,7 @@ import java.util.List;
 public class VasServiceImpl implements VasService {
 
     private final VasRepository VasRepository;
+    private final TagMetaService tagMetaService;
 
     @Override
     public VasResponseDto registerVas(VasRequestDto vasRequestDto) {
@@ -38,7 +40,9 @@ public class VasServiceImpl implements VasService {
 
         Vas savedVas = VasRepository.save(vas);
 
-        vasResponseDto.setVasDto(VasDto.from(savedVas));
+        List<String> tagList = tagMetaService.extractTagsFromCode(savedVas.getTagCode());
+
+        vasResponseDto.setVasDto(VasDto.from(savedVas, tagList));
 
         return vasResponseDto;
     }
@@ -53,7 +57,8 @@ public class VasServiceImpl implements VasService {
 
         List<VasDto> vasDtoList = new ArrayList<>();
         for (Vas vas : vasList) {
-            VasDto vasDto = VasDto.from(vas);
+            List<String> tagList = tagMetaService.extractTagsFromCode(vas.getTagCode());
+            VasDto vasDto = VasDto.from(vas, tagList);
             vasDtoList.add(vasDto);
         }
 
@@ -69,7 +74,9 @@ public class VasServiceImpl implements VasService {
         Vas vas = VasRepository.findById(vasId)
                 .orElseThrow(() -> new DataNotFoundException("Vas Id " + vasId + " Not Found"));
 
-        vasResponseDto.setVasDto(VasDto.from(vas));
+        List<String> tagList = tagMetaService.extractTagsFromCode(vas.getTagCode());
+
+        vasResponseDto.setVasDto(VasDto.from(vas, tagList));
 
         return vasResponseDto;
     }
@@ -91,7 +98,9 @@ public class VasServiceImpl implements VasService {
 
         Vas updatedVas = VasRepository.save(vas);
 
-        vasResponseDto.setVasDto(VasDto.from(updatedVas));
+        List<String> tagList = tagMetaService.extractTagsFromCode(updatedVas.getTagCode());
+
+        vasResponseDto.setVasDto(VasDto.from(updatedVas, tagList));
 
         return vasResponseDto;
     }
