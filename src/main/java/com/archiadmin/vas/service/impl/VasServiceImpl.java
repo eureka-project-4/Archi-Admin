@@ -1,35 +1,36 @@
-package com.archiadmin.service.service.impl;
+package com.archiadmin.vas.service.impl;
 
 import com.archiadmin.exception.business.DataNotFoundException;
-import com.archiadmin.service.dto.VasDto;
-import com.archiadmin.service.dto.request.VasRequestDto;
-import com.archiadmin.service.dto.response.VasResponseDto;
-import com.archiadmin.service.entity.Vas;
-import com.archiadmin.service.repository.VasRepository;
-import com.archiadmin.service.service.VasService;
+import com.archiadmin.vas.dto.VasDto;
+import com.archiadmin.vas.dto.request.VasRequestDto;
+import com.archiadmin.vas.dto.response.VasResponseDto;
+import com.archiadmin.vas.entity.Vas;
+import com.archiadmin.vas.repository.VasRepository;
+import com.archiadmin.vas.service.VasService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@org.springframework.stereotype.Service
+@Service
 @RequiredArgsConstructor
 public class VasServiceImpl implements VasService {
 
     private final VasRepository VasRepository;
 
     @Override
-    public VasResponseDto registerService(VasRequestDto vasRequestDto) {
+    public VasResponseDto registerVas(VasRequestDto vasRequestDto) {
         VasResponseDto vasResponseDto = new VasResponseDto();
 
         Vas vas = Vas.builder()
-                .serviceName(vasRequestDto.getServiceName())
+                .vasName(vasRequestDto.getVasName())
                 .price(vasRequestDto.getPrice())
                 .imageUrl(vasRequestDto.getImageUrl())
-                .serviceDescription(vasRequestDto.getServiceDescription())
+                .vasDescription(vasRequestDto.getVasDescription())
                 .saleRate(vasRequestDto.getSaleRate())
                 .tagCode(vasRequestDto.getTagCode())
                 .categoryCode(vasRequestDto.getCategoryCode())
@@ -37,13 +38,13 @@ public class VasServiceImpl implements VasService {
 
         Vas savedVas = VasRepository.save(vas);
 
-        vasResponseDto.setServiceDto(VasDto.from(savedVas));
+        vasResponseDto.setVasDto(VasDto.from(savedVas));
 
         return vasResponseDto;
     }
 
     @Override
-    public VasResponseDto getServiceList(Integer pageNumber, Integer pageSize) {
+    public VasResponseDto getVasList(Integer pageNumber, Integer pageSize) {
         VasResponseDto vasResponseDto = new VasResponseDto();
 
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
@@ -56,50 +57,50 @@ public class VasServiceImpl implements VasService {
             vasDtoList.add(vasDto);
         }
 
-        vasResponseDto.setServiceDtoList(vasDtoList);
+        vasResponseDto.setVasDtoList(vasDtoList);
 
         return vasResponseDto;
     }
 
     @Override
-    public VasResponseDto getServiceById(Long serviceId) {
+    public VasResponseDto getVasById(Long vasId) {
         VasResponseDto vasResponseDto = new VasResponseDto();
 
-        Vas vas = VasRepository.findById(serviceId)
-                .orElseThrow(() -> new DataNotFoundException("Service Id " + serviceId + " Not Found"));
+        Vas vas = VasRepository.findById(vasId)
+                .orElseThrow(() -> new DataNotFoundException("Vas Id " + vasId + " Not Found"));
 
-        vasResponseDto.setServiceDto(VasDto.from(vas));
+        vasResponseDto.setVasDto(VasDto.from(vas));
 
         return vasResponseDto;
     }
 
     @Override
-    public VasResponseDto updateService(Long serviceId, VasRequestDto vasRequestDto) {
+    public VasResponseDto updateVas(Long vasId, VasRequestDto vasRequestDto) {
         VasResponseDto vasResponseDto = new VasResponseDto();
 
-        Vas vas = VasRepository.findById(serviceId)
-                .orElseThrow(() -> new DataNotFoundException("Service Id " + serviceId + " Not Found"));
+        Vas vas = VasRepository.findById(vasId)
+                .orElseThrow(() -> new DataNotFoundException("Vas Id " + vasId + " Not Found"));
 
-        vas.setServiceName(vasRequestDto.getServiceName());
+        vas.setVasName(vasRequestDto.getVasName());
         vas.setPrice(vasRequestDto.getPrice());
         vas.setImageUrl(vasRequestDto.getImageUrl());
-        vas.setServiceDescription(vasRequestDto.getServiceDescription());
+        vas.setVasDescription(vasRequestDto.getVasDescription());
         vas.setSaleRate(vasRequestDto.getSaleRate());
         vas.setTagCode(vasRequestDto.getTagCode());
         vas.setCategoryCode(vasRequestDto.getCategoryCode());
 
-        Vas updatedService = VasRepository.save(vas);
+        Vas updatedVas = VasRepository.save(vas);
 
-        vasResponseDto.setServiceDto(VasDto.from(updatedService));
+        vasResponseDto.setVasDto(VasDto.from(updatedVas));
 
         return vasResponseDto;
     }
 
     @Override
-    public void deleteService(Long serviceId) {
-        VasRepository.findById(serviceId)
-                .orElseThrow(() -> new DataNotFoundException("Service Id " + serviceId + " Not Found"));
+    public void deleteVas(Long vasId) {
+        VasRepository.findById(vasId)
+                .orElseThrow(() -> new DataNotFoundException("Vas Id " + vasId + " Not Found"));
 
-        VasRepository.deleteById(serviceId);
+        VasRepository.deleteById(vasId);
     }
 }

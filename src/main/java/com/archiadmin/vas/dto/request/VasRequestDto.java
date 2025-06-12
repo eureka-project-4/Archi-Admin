@@ -1,13 +1,13 @@
-package com.archiadmin.service.dto.request;
+package com.archiadmin.vas.dto.request;
 
 import lombok.Getter;
 
 @Getter
 public class VasRequestDto {
-    private String serviceName;
+    private String vasName;
     private int price;
     private String imageUrl;
-    private String serviceDescription;
+    private String vasDescription;
     private int saleRate;
     private long tagCode;
     private String categoryCode;

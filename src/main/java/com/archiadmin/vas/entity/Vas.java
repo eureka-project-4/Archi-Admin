@@ -1,4 +1,4 @@
-package com.archiadmin.service.entity;
+package com.archiadmin.vas.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,21 +8,20 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "services")
+@Table(name = "vass")
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Vas {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long serviceId;
-    private String serviceName;
+    private Long vasId;
+    private String vasName;
     private int price;
     private String imageUrl;
-    private String serviceDescription;
+    private String vasDescription;
     private int saleRate;
     private long tagCode;
     private String categoryCode;
