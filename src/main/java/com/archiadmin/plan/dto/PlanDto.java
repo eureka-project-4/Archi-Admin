@@ -26,6 +26,7 @@ public class PlanDto {
         return PlanDto.builder()
                 .planId(plan.getPlanId())
                 .planName(plan.getPlanName())
+                .price(plan.getPrice())
                 .monthData(plan.getMonthData())
                 .callUsage(plan.getCallUsage())
                 .messageUsage(plan.getMessageUsage())
