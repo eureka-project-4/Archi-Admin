@@ -1,16 +1,14 @@
-package com.archiadmin.code.tagmeta.domain.id;
+package com.archiadmin.code.tagmeta.entity.id;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 
 @Embeddable
 @Getter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
