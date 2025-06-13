@@ -1,17 +1,18 @@
-package com.archiadmin.code.tagmeta.domain;
+package com.archiadmin.code.tagmeta.entity;
 
-import com.archiadmin.code.tagmeta.domain.id.TagMetaId;
+import com.archiadmin.code.tagmeta.entity.id.TagMetaId;
 import com.archiadmin.common.TimeStamp;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Getter
+@Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tag_meta")
 public class TagMeta extends TimeStamp {
