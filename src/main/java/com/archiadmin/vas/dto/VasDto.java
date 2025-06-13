@@ -1,34 +1,35 @@
-package com.archiadmin.service.dto;
+package com.archiadmin.vas.dto;
 
-import com.archiadmin.service.entity.Vas;
+import com.archiadmin.vas.entity.Vas;
 import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
 public class VasDto {
-    private Long serviceId;
-    private String serviceName;
+    private Long vasId;
+    private String vasName;
     private int price;
     private String imageUrl;
-    private String serviceDescription;
+    private String vasDescription;
     private int saleRate;
-    private long tagCode;
+    private List<String> tagList;
     private String categoryCode;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public static VasDto from(Vas vas) {
+    public static VasDto from(Vas vas, List<String> tagList) {
         return VasDto.builder()
-                .serviceId(vas.getServiceId())
-                .serviceName(vas.getServiceName())
+                .vasId(vas.getVasId())
+                .vasName(vas.getVasName())
                 .price(vas.getPrice())
                 .imageUrl(vas.getImageUrl())
-                .serviceDescription(vas.getServiceDescription())
+                .vasDescription(vas.getVasDescription())
                 .saleRate(vas.getSaleRate())
-                .tagCode(vas.getTagCode())
+                .tagList(tagList)
                 .categoryCode(vas.getCategoryCode())
                 .createdAt(vas.getCreatedAt())
                 .updatedAt(vas.getUpdatedAt())

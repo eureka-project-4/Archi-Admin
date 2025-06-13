@@ -1,5 +1,6 @@
 package com.archiadmin.coupon.service.impl;
 
+import com.archiadmin.code.tagmeta.service.TagMetaService;
 import com.archiadmin.coupon.dto.request.CouponRequestDto;
 import com.archiadmin.coupon.dto.response.CouponResponseDto;
 import com.archiadmin.coupon.entity.Coupon;
@@ -21,6 +22,7 @@ import java.util.List;
 public class CouponServiceImpl implements CouponService {
 
     private final CouponRepository couponRepository;
+    private final TagMetaService tagMetaService;
 
     @Override
     public CouponResponseDto registerCoupon(CouponRequestDto couponRequestDto) {
@@ -36,7 +38,9 @@ public class CouponServiceImpl implements CouponService {
 
         Coupon savedCoupon = couponRepository.save(coupon);
 
-        couponResponseDto.setCouponDto(CouponDto.from(savedCoupon));
+        List<String> tagList = tagMetaService.extractTagsFromCode(coupon.getTagCode());
+
+        couponResponseDto.setCouponDto(CouponDto.from(savedCoupon, tagList));
 
         return couponResponseDto;
     }
@@ -51,7 +55,8 @@ public class CouponServiceImpl implements CouponService {
 
         List<CouponDto> couponDtoList = new ArrayList<>();
         for (Coupon coupon : couponList) {
-            CouponDto couponDto = CouponDto.from(coupon);
+            List<String> tagList = tagMetaService.extractTagsFromCode(coupon.getTagCode());
+            CouponDto couponDto = CouponDto.from(coupon, tagList);
             couponDtoList.add(couponDto);
         }
 
@@ -67,7 +72,9 @@ public class CouponServiceImpl implements CouponService {
         Coupon coupon = couponRepository.findById(couponId)
                 .orElseThrow(() -> new DataNotFoundException("Coupon Id " + couponId + " Not Found"));
 
-        couponResponseDto.setCouponDto(CouponDto.from(coupon));
+        List<String> tagList = tagMetaService.extractTagsFromCode(coupon.getTagCode());
+
+        couponResponseDto.setCouponDto(CouponDto.from(coupon, tagList));
 
         return couponResponseDto;
     }
@@ -87,7 +94,9 @@ public class CouponServiceImpl implements CouponService {
 
         Coupon updatedCoupon = couponRepository.save(coupon);
 
-        couponResponseDto.setCouponDto(CouponDto.from(updatedCoupon));
+        List<String> tagList = tagMetaService.extractTagsFromCode(coupon.getTagCode());
+
+        couponResponseDto.setCouponDto(CouponDto.from(updatedCoupon, tagList));
 
         return couponResponseDto;
     }

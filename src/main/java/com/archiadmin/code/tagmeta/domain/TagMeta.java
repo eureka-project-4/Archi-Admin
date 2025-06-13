@@ -1,0 +1,27 @@
+package com.archiadmin.code.tagmeta.domain;
+
+import com.archiadmin.code.tagmeta.domain.id.TagMetaId;
+import com.archiadmin.common.TimeStamp;
+import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "tag_meta")
+public class TagMeta extends TimeStamp {
+
+    @EmbeddedId
+    private TagMetaId id;
+
+    @Column(name = "tag_description", length = 50)
+    private String tagDescription;
+
+    @Column(name = "bit_position")
+    private Integer bitPosition;
+}

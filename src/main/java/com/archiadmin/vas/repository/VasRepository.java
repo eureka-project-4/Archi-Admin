@@ -1,6 +1,6 @@
-package com.archiadmin.service.repository;
+package com.archiadmin.vas.repository;
 
-import com.archiadmin.service.entity.Vas;
+import com.archiadmin.vas.entity.Vas;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

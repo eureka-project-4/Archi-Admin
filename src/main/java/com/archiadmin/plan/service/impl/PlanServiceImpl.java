@@ -1,5 +1,6 @@
 package com.archiadmin.plan.service.impl;
 
+import com.archiadmin.code.tagmeta.service.TagMetaService;
 import com.archiadmin.exception.business.DataNotFoundException;
 import com.archiadmin.plan.dto.PlanDto;
 import com.archiadmin.plan.dto.request.PlanRequestDto;
@@ -21,6 +22,7 @@ import java.util.List;
 public class PlanServiceImpl implements PlanService {
 
     private final PlanRepository planRepository;
+    private final TagMetaService tagMetaService;
 
     @Override
     public PlanResponseDto registerPlan(PlanRequestDto planRequestDto) {
@@ -39,7 +41,9 @@ public class PlanServiceImpl implements PlanService {
 
         Plan savedPlan = planRepository.save(plan);
 
-        planResponseDto.setPlanDto(PlanDto.from(savedPlan));
+        List<String> tagList = tagMetaService.extractTagsFromCode(plan.getTagCode());
+
+        planResponseDto.setPlanDto(PlanDto.from(savedPlan, tagList));
 
         return planResponseDto;
     }
@@ -54,7 +58,8 @@ public class PlanServiceImpl implements PlanService {
 
         List<PlanDto> planDtoList = new ArrayList<>();
         for (Plan plan : planList) {
-            PlanDto planDto = PlanDto.from(plan);
+            List<String> tagList = tagMetaService.extractTagsFromCode(plan.getTagCode());
+            PlanDto planDto = PlanDto.from(plan, tagList);
             planDtoList.add(planDto);
         }
 
@@ -70,7 +75,9 @@ public class PlanServiceImpl implements PlanService {
         Plan plan = planRepository.findById(planId)
                 .orElseThrow(() -> new DataNotFoundException("Plan Id " + planId + " Not Found"));
 
-        planResponseDto.setPlanDto(PlanDto.from(plan));
+        List<String> tagList = tagMetaService.extractTagsFromCode(plan.getTagCode());
+
+        planResponseDto.setPlanDto(PlanDto.from(plan, tagList));
 
         return planResponseDto;
     }
@@ -93,7 +100,9 @@ public class PlanServiceImpl implements PlanService {
 
         Plan updatedPlan = planRepository.save(plan);
 
-        planResponseDto.setPlanDto(PlanDto.from(updatedPlan));
+        List<String> tagList = tagMetaService.extractTagsFromCode(plan.getTagCode());
+
+        planResponseDto.setPlanDto(PlanDto.from(updatedPlan, tagList));
 
         return planResponseDto;
     }
