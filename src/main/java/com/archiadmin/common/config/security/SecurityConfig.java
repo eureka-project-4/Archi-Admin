@@ -22,7 +22,9 @@ public class SecurityConfig {
                         request -> {
                             request.requestMatchers("/",
                                             "/csrf-token",
-                                            "/admins/register")
+                                            "/admins/register",
+                                    "/actuator/prometheus"
+                                )
                                     .permitAll()
                                     .anyRequest().authenticated();
                         }

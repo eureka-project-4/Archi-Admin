@@ -26,6 +26,16 @@ spring:
         format_sql: true
     show-sql: true # SQL 로그 출력 여부
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, health, info
+
+  prometheus:
+    metrics:
+      export:
+        enabled: true
 
 app:
   upload-dir: uploads/
