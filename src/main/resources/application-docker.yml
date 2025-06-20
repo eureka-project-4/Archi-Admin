@@ -26,6 +26,14 @@ spring:
         format_sql: true
     show-sql: true # SQL 로그 출력 여부
 
+  ai:
+    openai:
+      chat:
+        options:
+          model: gpt-3.5-turbo
+          temperature: 0.3
+          max-tokens: 1000
+
 management:
   endpoints:
     web:
