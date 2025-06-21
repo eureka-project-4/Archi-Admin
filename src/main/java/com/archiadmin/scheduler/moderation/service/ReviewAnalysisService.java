@@ -62,7 +62,7 @@ public class ReviewAnalysisService {
         }
 
         if (!needsGptAnalysis.isEmpty()) {
-            log.debug("GPT 분석 필요한 리뷰 수: {}/{}", needsGptAnalysis.size(), reviewContents.size());
+            log.info("GPT 분석 필요한 리뷰 수: {}/{}", needsGptAnalysis.size(), reviewContents.size());
             List<ReviewAnalysisResult> gptResults = processBatch(needsGptAnalysis);
             results.addAll(gptResults);
         }

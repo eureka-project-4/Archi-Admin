@@ -110,7 +110,7 @@ public class ReviewModerationService {
                         reviewType, extractId(review), result.getReason(), result.getConfidenceScore());
             } else {
                 reviewsToKeep.add(review);
-                log.debug("{} 리뷰 유지 - ID: {}, 확신도: {:.2f}",
+                log.info("{} 리뷰 유지 - ID: {}, 확신도: {:.2f}",
                         reviewType, extractId(review), result.getConfidenceScore());
             }
         }

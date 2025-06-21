@@ -27,13 +27,17 @@ public class SimpleModerationService {
             Moderation moderation = response.getResult().getOutput();
             ModerationResult result = moderation.getResults().get(0);
 
-            return result.isFlagged();
+            boolean flagged = result.isFlagged();
+            log.info("Moderation API 호출 결과 - 내용: '{}', flagged: {}", content, flagged);
+
+            return flagged;
 
         } catch (Exception e) {
             log.error("Moderation API 호출 실패: {}", e.getMessage());
             return false;
         }
     }
+
 
     public String getModerationReason(String content) {
         try {
