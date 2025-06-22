@@ -1,6 +1,7 @@
 package com.archiadmin.product.vas.service.impl;
 
 import com.archiadmin.code.tagmeta.service.TagMetaService;
+import com.archiadmin.common.response.CountResponseDto;
 import com.archiadmin.exception.business.DataNotFoundException;
 import com.archiadmin.product.vas.dto.VasDto;
 import com.archiadmin.product.vas.dto.request.VasRequestDto;
@@ -111,5 +112,14 @@ public class VasServiceImpl implements VasService {
                 .orElseThrow(() -> new DataNotFoundException("Vas Id " + vasId + " Not Found"));
 
         VasRepository.deleteById(vasId);
+    }
+
+    @Override
+    public CountResponseDto countVas() {
+        CountResponseDto countResponseDto = CountResponseDto.builder()
+                .count(VasRepository.count())
+                .build();
+
+        return countResponseDto;
     }
 }

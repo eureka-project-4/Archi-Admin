@@ -1,6 +1,7 @@
 package com.archiadmin.product.vas.service;
 
 
+import com.archiadmin.common.response.CountResponseDto;
 import com.archiadmin.product.vas.dto.request.VasRequestDto;
 import com.archiadmin.product.vas.dto.response.VasResponseDto;
 
@@ -14,4 +15,5 @@ public interface VasService {
 
     void deleteVas(Long vasId);
 
+    CountResponseDto countVas();
 }

@@ -1,5 +1,6 @@
 package com.archiadmin.product.coupon.service;
 
+import com.archiadmin.common.response.CountResponseDto;
 import com.archiadmin.product.coupon.dto.request.CouponRequestDto;
 import com.archiadmin.product.coupon.dto.response.CouponResponseDto;
 
@@ -12,5 +13,7 @@ public interface CouponService {
     CouponResponseDto updateCoupon(Long couponId, CouponRequestDto couponRequestDto);
 
     void deleteCoupon(Long couponId);
+
+    CountResponseDto countCoupon();
 
 }

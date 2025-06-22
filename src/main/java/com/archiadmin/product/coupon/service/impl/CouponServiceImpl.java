@@ -1,6 +1,7 @@
 package com.archiadmin.product.coupon.service.impl;
 
 import com.archiadmin.code.tagmeta.service.TagMetaService;
+import com.archiadmin.common.response.CountResponseDto;
 import com.archiadmin.product.coupon.dto.request.CouponRequestDto;
 import com.archiadmin.product.coupon.dto.response.CouponResponseDto;
 import com.archiadmin.product.coupon.entity.Coupon;
@@ -107,5 +108,14 @@ public class CouponServiceImpl implements CouponService {
                 .orElseThrow(() -> new DataNotFoundException("Coupon Id " + couponId + " Not Found"));
 
         couponRepository.deleteById(couponId);
+    }
+
+    @Override
+    public CountResponseDto countCoupon() {
+        CountResponseDto countResponseDto =  CountResponseDto.builder()
+                .count(couponRepository.count())
+                .build();
+
+        return countResponseDto;
     }
 }

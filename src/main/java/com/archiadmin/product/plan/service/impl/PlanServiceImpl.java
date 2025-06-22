@@ -1,6 +1,7 @@
 package com.archiadmin.product.plan.service.impl;
 
 import com.archiadmin.code.tagmeta.service.TagMetaService;
+import com.archiadmin.common.response.CountResponseDto;
 import com.archiadmin.exception.business.DataNotFoundException;
 import com.archiadmin.product.plan.dto.PlanDto;
 import com.archiadmin.product.plan.dto.request.PlanRequestDto;
@@ -113,5 +114,14 @@ public class PlanServiceImpl implements PlanService {
                 .orElseThrow(() -> new DataNotFoundException("Plan Id " + planId + " Not Found"));
 
         planRepository.deleteById(planId);
+    }
+
+    @Override
+    public CountResponseDto countPlan() {
+        CountResponseDto countResponseDto = CountResponseDto.builder()
+                .count(planRepository.count())
+                .build();
+
+        return countResponseDto;
     }
 }
