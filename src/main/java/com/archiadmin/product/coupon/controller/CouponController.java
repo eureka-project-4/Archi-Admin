@@ -1,6 +1,7 @@
 package com.archiadmin.product.coupon.controller;
 
 import com.archiadmin.common.response.ApiResponse;
+import com.archiadmin.common.response.CountResponseDto;
 import com.archiadmin.product.coupon.dto.request.CouponRequestDto;
 import com.archiadmin.product.coupon.dto.response.CouponResponseDto;
 import com.archiadmin.product.coupon.service.CouponService;
@@ -43,5 +44,10 @@ public class CouponController {
     public ResponseEntity<ApiResponse<Void>> deleteCoupon(@PathVariable Long couponId) {
         couponService.deleteCoupon(couponId);
         return ResponseEntity.ok(ApiResponse.success("Coupon Id " + couponId + " 삭제가 성공적으로 처리되었습니다.", null));
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<ApiResponse<CountResponseDto>> countCoupon() {
+        return ResponseEntity.ok(ApiResponse.success(couponService.countCoupon()));
     }
 }

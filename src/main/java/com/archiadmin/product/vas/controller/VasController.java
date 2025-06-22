@@ -1,6 +1,7 @@
 package com.archiadmin.product.vas.controller;
 
 import com.archiadmin.common.response.ApiResponse;
+import com.archiadmin.common.response.CountResponseDto;
 import com.archiadmin.product.vas.dto.request.VasRequestDto;
 import com.archiadmin.product.vas.dto.response.VasResponseDto;
 import com.archiadmin.product.vas.service.VasService;
@@ -43,5 +44,10 @@ public class VasController {
     public ResponseEntity<ApiResponse<Void>> deleteVas(@PathVariable Long vasId) {
         vasService.deleteVas(vasId);
         return ResponseEntity.ok(ApiResponse.success("Vas Id " + vasId + " 삭제가 성공적으로 처리되었습니다.", null));
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<ApiResponse<CountResponseDto>> countVas() {
+        return ResponseEntity.ok(ApiResponse.success(vasService.countVas()));
     }
 }

@@ -1,5 +1,6 @@
 package com.archiadmin.product.plan.service;
 
+import com.archiadmin.common.response.CountResponseDto;
 import com.archiadmin.product.plan.dto.request.PlanRequestDto;
 import com.archiadmin.product.plan.dto.response.PlanResponseDto;
 
@@ -13,4 +14,5 @@ public interface PlanService {
 
     void deletePlan(Long planId);
 
+    CountResponseDto countPlan();
 }

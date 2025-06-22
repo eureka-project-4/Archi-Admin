@@ -1,6 +1,7 @@
 package com.archiadmin.product.plan.controller;
 
 import com.archiadmin.common.response.ApiResponse;
+import com.archiadmin.common.response.CountResponseDto;
 import com.archiadmin.product.plan.dto.request.PlanRequestDto;
 import com.archiadmin.product.plan.dto.response.PlanResponseDto;
 import com.archiadmin.product.plan.service.PlanService;
@@ -42,5 +43,10 @@ public class PlanController {
     public ResponseEntity<ApiResponse<Void>> deletePlan(@PathVariable Long planId) {
         planservice.deletePlan(planId);
         return ResponseEntity.ok(ApiResponse.success("Plan Id " + planId + " 삭제가 성공적으로 처리되었습니다.", null));
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<ApiResponse<CountResponseDto>> countPlan() {
+        return ResponseEntity.ok(ApiResponse.success(planservice.countPlan()));
     }
 }
