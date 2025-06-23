@@ -6,6 +6,7 @@ import com.archiadmin.code.commoncode.entity.CommonCode;
 import com.archiadmin.code.commoncode.entity.id.CommonCodeId;
 import com.archiadmin.code.commoncode.repository.CommonCodeRepository;
 import com.archiadmin.code.commoncode.service.CommonCodeService;
+import com.archiadmin.common.response.CountResponseDto;
 import com.archiadmin.exception.business.DataNotFoundException;
 import com.archiadmin.exception.business.DuplicateResourceException;
 import lombok.RequiredArgsConstructor;
@@ -104,5 +105,14 @@ public class CommonCodeServiceImpl implements CommonCodeService {
                 .orElseThrow(() -> new DataNotFoundException("CommonCode Id " + commonCodeId + " Not Found"));
 
         commonCodeRepository.deleteById(commonCodeId);
+    }
+
+    @Override
+    public CountResponseDto countCommonCode() {
+        CountResponseDto countResponseDto =  CountResponseDto.builder()
+                .count(commonCodeRepository.count())
+                .build();
+
+        return countResponseDto;
     }
 }
