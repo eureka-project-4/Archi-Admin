@@ -4,6 +4,7 @@ import com.archiadmin.code.groupcode.dto.request.GroupCodeDto;
 import com.archiadmin.code.groupcode.dto.response.GroupCodeResponseDto;
 import com.archiadmin.code.groupcode.service.GroupCodeService;
 import com.archiadmin.common.response.ApiResponse;
+import com.archiadmin.common.response.CountResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,5 +44,10 @@ public class GroupCodeController {
     public ResponseEntity<ApiResponse<Void>> deleteService(@RequestParam String groupCode) {
         groupCodeService.deleteGroupCode(groupCode);
         return ResponseEntity.ok(ApiResponse.success("GroupCode Id " + groupCode + " 삭제가 성공적으로 처리되었습니다.", null));
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<ApiResponse<CountResponseDto>> countCoupon() {
+        return ResponseEntity.ok(ApiResponse.success(groupCodeService.countGroupCode()));
     }
 }

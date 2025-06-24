@@ -2,6 +2,7 @@ package com.archiadmin.code.tagmeta.service;
 
 import com.archiadmin.code.tagmeta.dto.request.TagMetaDto;
 import com.archiadmin.code.tagmeta.dto.response.TagMetaResponseDto;
+import com.archiadmin.common.response.CountResponseDto;
 
 import java.util.List;
 
@@ -16,4 +17,5 @@ public interface TagMetaService {
     TagMetaResponseDto updateTagMeta(TagMetaDto tagMetaDto);
 
     void deleteTagMeta(String tagType, String tagKey);
+    CountResponseDto countTagMeta();
 }

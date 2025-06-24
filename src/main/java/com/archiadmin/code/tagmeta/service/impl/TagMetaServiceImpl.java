@@ -6,6 +6,7 @@ import com.archiadmin.code.tagmeta.entity.TagMeta;
 import com.archiadmin.code.tagmeta.entity.id.TagMetaId;
 import com.archiadmin.code.tagmeta.repository.TagMetaRepository;
 import com.archiadmin.code.tagmeta.service.TagMetaService;
+import com.archiadmin.common.response.CountResponseDto;
 import com.archiadmin.exception.business.DataNotFoundException;
 import com.archiadmin.exception.business.DuplicateResourceException;
 import lombok.RequiredArgsConstructor;
@@ -141,5 +142,14 @@ public class TagMetaServiceImpl implements TagMetaService {
                 .orElseThrow(() -> new DataNotFoundException("TagMeta Id " + tagMetaId + " Not Found"));
 
         tagMetaRepository.deleteById(tagMetaId);
+    }
+
+    @Override
+    public CountResponseDto countTagMeta() {
+        CountResponseDto countResponseDto =  CountResponseDto.builder()
+                .count(tagMetaRepository.count())
+                .build();
+
+        return countResponseDto;
     }
 }

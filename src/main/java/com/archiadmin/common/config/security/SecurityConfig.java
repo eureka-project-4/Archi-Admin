@@ -22,7 +22,9 @@ public class SecurityConfig {
                         request -> {
                             request.requestMatchers("/",
                                             "/csrf-token",
-                                            "/admins/register")
+                                            "/admins/register",
+                                    "/actuator/prometheus"
+                                )
                                     .permitAll()
                                     .anyRequest().authenticated();
                         }
@@ -30,7 +32,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .formLogin(form ->
                         form
-                                .loginPage("/login.html")
+                                .loginPage("/index.html") // 로그인 페이지
                                 .loginProcessingUrl("/admins/login")
                                 .usernameParameter("email")
                                 .passwordParameter("password")

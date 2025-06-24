@@ -5,6 +5,7 @@ import com.archiadmin.code.groupcode.dto.response.GroupCodeResponseDto;
 import com.archiadmin.code.groupcode.entity.GroupCode;
 import com.archiadmin.code.groupcode.repository.GroupCodeRepository;
 import com.archiadmin.code.groupcode.service.GroupCodeService;
+import com.archiadmin.common.response.CountResponseDto;
 import com.archiadmin.exception.business.DataNotFoundException;
 import com.archiadmin.exception.business.DuplicateResourceException;
 import lombok.RequiredArgsConstructor;
@@ -97,5 +98,14 @@ public class GroupCodeServiceImpl implements GroupCodeService {
                 .orElseThrow(() -> new DataNotFoundException("GroupCode Id " + groupCode + " Not Found"));
 
         groupCodeRepository.deleteById(groupCode);
+    }
+
+    @Override
+    public CountResponseDto countGroupCode() {
+        CountResponseDto countResponseDto =  CountResponseDto.builder()
+                .count(groupCodeRepository.count())
+                .build();
+
+        return countResponseDto;
     }
 }

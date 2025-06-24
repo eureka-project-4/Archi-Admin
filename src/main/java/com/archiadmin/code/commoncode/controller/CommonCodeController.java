@@ -4,6 +4,7 @@ import com.archiadmin.code.commoncode.dto.request.CommonCodeDto;
 import com.archiadmin.code.commoncode.dto.response.CommonCodeResponseDto;
 import com.archiadmin.code.commoncode.service.CommonCodeService;
 import com.archiadmin.common.response.ApiResponse;
+import com.archiadmin.common.response.CountResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,5 +44,10 @@ public class CommonCodeController {
     public ResponseEntity<ApiResponse<Void>> deleteService(@RequestParam String commonCode, @RequestParam String groupCode) {
         commonCodeService.deleteCommonCode(commonCode, groupCode);
         return ResponseEntity.ok(ApiResponse.success("CommonCode Id [commonCode : " + commonCode + ", groupCode : " + groupCode + "] 삭제가 성공적으로 처리되었습니다.", null));
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<ApiResponse<CountResponseDto>> countCommonCode() {
+        return ResponseEntity.ok(ApiResponse.success(commonCodeService.countCommonCode()));
     }
 }

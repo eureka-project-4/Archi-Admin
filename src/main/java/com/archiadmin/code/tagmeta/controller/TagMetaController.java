@@ -4,6 +4,7 @@ import com.archiadmin.code.tagmeta.dto.request.TagMetaDto;
 import com.archiadmin.code.tagmeta.dto.response.TagMetaResponseDto;
 import com.archiadmin.code.tagmeta.service.TagMetaService;
 import com.archiadmin.common.response.ApiResponse;
+import com.archiadmin.common.response.CountResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,5 +43,10 @@ public class TagMetaController {
     public ResponseEntity<ApiResponse<Void>> deleteService(@RequestParam String tagMeta, @RequestParam String tagKey) {
         tagMetaService.deleteTagMeta(tagMeta, tagKey);
         return ResponseEntity.ok(ApiResponse.success("TagMeta Id [tagType : " + tagMeta + ", tagKey : " + tagKey + "] 삭제가 성공적으로 처리되었습니다.", null));
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<ApiResponse<CountResponseDto>> countTagMeta() {
+        return ResponseEntity.ok(ApiResponse.success(tagMetaService.countTagMeta()));
     }
 }
